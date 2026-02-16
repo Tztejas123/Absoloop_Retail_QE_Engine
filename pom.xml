@@ -5,31 +5,45 @@
 	<groupId>com.absolooplab</groupId>
 	<artifactId>Absoloop_Retail_QE_Engine</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	   <build>
-	 <pluginManagement>
-		 <plugins>
-			<plugin>
-	          <groupId>org.apache.maven.plugins</groupId>
-	          <artifactId>maven-compiler-plugin</artifactId>
-	          <version>3.11.0</version>
-	      </plugin>
-	         <plugin>
-		          <groupId>org.apache.maven.plugins</groupId>
-		          <artifactId>maven-surefire-plugin</artifactId>
-		          <version>3.2.2</version>
-		          <configuration>
-					  <suiteXmlFiles>
-						  <suiteXmlFile>master.xml</suiteXmlFile>
-					  </suiteXmlFiles>
-				  </configuration>
-       		 </plugin>
-		 </plugins>
-	 </pluginManagement>
- </build>
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<build>
+		<plugins>
+
+			<!-- Compiler Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+			</plugin>
+
+			<!-- Surefire Plugin (TestNG Execution) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+
+					<!-- Master TestNG Suite -->
+					<suiteXmlFiles>
+						<suiteXmlFile>master.xml</suiteXmlFile>
+					</suiteXmlFiles>
+
+					<!-- Fail build if test fails (Important for Jenkins) -->
+					<testFailureIgnore>false</testFailureIgnore>
+
+					<!-- Parallel execution support -->
+					<forkCount>1</forkCount>
+					<reuseForks>true</reuseForks>
+
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 	<dependencies>
 		<!--https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>

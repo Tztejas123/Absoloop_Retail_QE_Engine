@@ -9,7 +9,6 @@ public class AccountRegistrationPage extends BasePage {
 	public AccountRegistrationPage(WebDriver driver) {
 		super(driver);
 	}
-
 	// Elements
 		@FindBy(name = "firstname")
 		WebElement txtFirstname;
