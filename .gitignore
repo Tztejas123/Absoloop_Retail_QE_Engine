@@ -1,19 +1,25 @@
-# Maven build output
+# --- Maven & Build ---
 target/
 test-output/
-
-# Compiled files
 *.class
 
-# Logs & reports
+# --- Logs & Reports ---
 logs/
 reports/
 screenshots/
+ExtentReports/
+surefire-reports/
 
-# IDE / OS junk
+# --- IDE Specific (Eclipse/IntelliJ/VS Code) ---
 .idea/
 .vscode/
 .settings/
 .classpath
 .project
 *.iml
+*.launch
+bin/
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
