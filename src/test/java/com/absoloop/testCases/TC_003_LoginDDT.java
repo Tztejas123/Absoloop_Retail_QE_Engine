@@ -2,69 +2,60 @@ package com.absoloop.testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import com.absoloop.pageObject.HomePage;
 import com.absoloop.pageObject.LoginPage;
 import com.absoloop.pageObject.MyAccountPage;
 import com.absoloop.testBase.BaseClass;
 import com.absolooplab.Utility.DataProviders;
 
-/*Data is valid  - login success - test pass  - logout
-Data is valid -- login failed - test fail
-
-Data is invalid - login success - test fail  - logout
-Data is invalid -- login failed - test pass
-*/
-
 public class TC_003_LoginDDT extends BaseClass {
 
-	@Test(dataProvider = "LoginData", dataProviderClass = DataProviders.class, groups = "Datadriven") // getting data
-																										// provider in
-																										// deffernt
-	// class
-	public void verify_loginDDT(String email, String password, String exp) {
-		logger.info("**** Starting TC_003_LoginDDT *****");
+    @Test(dataProvider = "LoginData", dataProviderClass = DataProviders.class, groups = "Datadriven")
+    public void verify_loginDDT(String email, String password, String exp) {
+        logger.info("**** Starting TC_003_LoginDDT for: " + email + " *****");
 
-		try {
+        try {
+            // Step 1: Navigation
+            HomePage hp = new HomePage(); // Using the new no-arg constructor
+            hp.clickMyAccount();
+            hp.clickLogin();
 
-			// Home page
-			HomePage hp = new HomePage(getDriver());
-			hp.clickMyAccount();
-			hp.clickLogin(); // Login link under MyAccount
+            // Step 2: Login Action
+            LoginPage lp = new LoginPage();
+            lp.setEmail(email);
+            lp.setPassword(password);
+            lp.clickLogin();
 
-			// Login page
-			LoginPage lp = new LoginPage(getDriver());
-			lp.setEmail(email);
-			lp.setPassword(password);
-			lp.clickLogin(); // Login button
+            // Step 3: Validation
+            MyAccountPage macc = new MyAccountPage();
+            boolean targetPage = macc.isMyAccountPageExists();
 
-			// My Account Page
-			MyAccountPage macc = new MyAccountPage(getDriver());
-			boolean targetPage = macc.isMyAccountPageExists();
+            if (exp.equalsIgnoreCase("Valid")) {
+                if (targetPage == true) {
+                    macc.clickLogout();
+                    Assert.assertTrue(true);
+                } else {
+                    logger.error("Login failed for Valid data");
+                    Assert.assertTrue(false);
+                }
+            }
 
-			if (exp.equalsIgnoreCase("Valid")) {
-				if (targetPage == true) {
-					macc.clickLogout();
-					Assert.assertTrue(true);
-				} else {
-					Assert.assertTrue(false);
-				}
-			}
+            if (exp.equalsIgnoreCase("Invalid")) {
+                if (targetPage == true) {
+                    macc.clickLogout();
+                    logger.error("Login succeeded for Invalid data");
+                    Assert.assertTrue(false);
+                } else {
+                    // Logic: Login failed as expected for Invalid data
+                    Assert.assertTrue(true);
+                }
+            }
+            
+        } catch (Exception e) {
+            logger.error("Exception occurred: " + e.getMessage());
+            Assert.fail("Test execution interrupted by exception.");
+        }
 
-			if (exp.equalsIgnoreCase("Invalid")) {
-				if (targetPage == true) {
-					macc.clickLogout();
-					Assert.assertTrue(false);
-				} else {
-					Assert.assertTrue(true);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("Test Failed: ", e); 
-			Assert.fail("Test failed: " + e.getMessage());
-		}
-
-		logger.info("**** Finished TC_003_LoginDDT *****");
-	}
-
+        logger.info("**** Finished TC_003_LoginDDT *****");
+    }
 }

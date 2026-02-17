@@ -3,7 +3,7 @@
 <suite name="Suite" thread-count="5" parallel="tests">
 	<listeners>
 		<listener class-name="com.absolooplab.Utility.ExtentReportManager" />
-	</listeners> 
+	</listeners>
 	<test thread-count="5" name="chrometest">
 		<parameter name="os" value="Windows" />
 		<parameter name="browser" value="chrome" />
@@ -12,16 +12,12 @@
 		</classes>
 	</test> <!--
 	Test -->
-
 	<test thread-count="5" name="edgetest">
 		<parameter name="os" value="Windows" />
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class name="com.absoloop.testCases.TC_001_AccountRegistrationtTest" />
 		</classes>
-	</test> <!--
-	Test -->
-
-
+	</test> 
 </suite> <!--
 Suite -->
