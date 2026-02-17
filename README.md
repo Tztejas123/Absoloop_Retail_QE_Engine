@@ -1,82 +1,34 @@
-Project Context & Business Impact
-This framework was originally designed as a Proof of Concept (POC) for a client to demonstrate the ROI of Test Automation on a complex e-commerce platform. 
-The Challenge
-•	The client faced bottlenecks with manual testing on OpenCart, specifically:
-•	Complex Business Logic: Validating dynamic cart calculations, Guest vs. User Checkout, and Order History.
-•	Unstable Elements: Handling dynamic dropdowns and AJAX loaders that caused flaky tests.
-•	Scalability: The need to validate flows across multiple data sets (Login, Registration) without rewriting code.
- The Solution & Outcome
-•	I architected this Hybrid Framework (TDD + Data-Driven) to simulate a real-world enterprise environment.
-•	Outcome: The POC successfully demonstrated stability and became the foundation for the full-scale project.
-Impact: Reduced manual regression execution time by 40%.
-Visibility: Provided stakeholders with clear Pass/Fail metrics via Extent Reports, eliminating communication gaps.
+Absoloop Retail QE Engine
+Overview
+The Absoloop Retail QE Engine is a robust, high-performance automation framework built to validate the Absoloop Retail application. This project demonstrates an advanced transition from basic sequential testing to a scalable, professional-grade solution. It is designed to explain career gaps by showcasing a deep understanding of the SDET lifecycle, specifically utilizing a narrative of 3.7 years of software testing experience.
+Technical Architecture
+• Design Pattern: Implemented using Page Object Model (POM) with a shared BasePage and BaseClass to ensure modularity and high maintainability.
+• Parallel Execution: Engineered with ThreadLocal<WebDriver> to provide full thread safety, allowing simultaneous cross-browser testing (Chrome, Edge, Firefox) without resource contention.
+• No-Argument Page Objects: Refactored Page Objects to automatically fetch driver instances from the static BaseClass.getDriver() method, reducing code complexity.
+• Logging & Reporting: Integrated Log4j2 for precise console logging and Extent Reports for professional, interactive HTML reporting.
+Technology Stack
+• Language: Java
+• Test Orchestration: TestNG
+• Automation: Selenium WebDriver
+• Build Tool: Maven (with customized pom.xml for version control)
+• Infrastructure: Integrated Jenkinsfile and Windows Batch (.bat) scripts for CI/CD pipeline automation.
+How to Run the Tests
 
- OpenCart Hybrid Test Automation Framework 
-•	[Java](https://img.shields.io/badge/Language-Java-orange)
-•	[Selenium](https://img.shields.io/badge/Tool-Selenium_WebDriver-blue)
-•	[TestNG](https://img.shields.io/badge/Framework-TestNG-red)
-•	[Build](https://img.shields.io/badge/Build-Maven-green)
+1. Via TestNG XML
+   Run parallel cross-browser suites directly:
+   • ParallelCross-BrowserTesting.xml (Optimized for Chrome & Edge)
+   • maintestng.xml (Full regression suite)
+2. Via Command Line (Maven):Ensure your environment variables are set (Java 11 or 17 as per pom.xml configuration):
+   mvn clean test
 
-Project Overview
-This is a robust Hybrid Test Automation Framework designed to automate the e-commerce flows of [OpenCart](https://demo.opencart.com/). It is built using Selenium WebDriver and Java, implementing the Page Object Model (POM) design pattern for maintainability and scalability. 
-The framework supports Data-Driven Testing, Cross-Browser Execution, and generates detailed Extent Reports with logs and screenshots. 
- 
- Tech Stack
-Component	Tool / Library
-Language	Java (JDK 11+)
-Web Automation	Selenium WebDriver
-Test Framework	TestNG
-Build Tool	Apache Maven
-Design Pattern	Page Object Model (POM)
-Reporting	Extent Reports Spark Reporter
-Logging	Log4j2
-Data Source	Apache POI (Excel Integration)
-CI/CD	Jenkins
-
- Framework Structure
-The project follows a standard Maven directory structure: 
-OpenCartTestNGFramework
-├── src/test/java
-│   ├── com.absoloop.pageObject     Page Classes (Locators & Actions)
-│   ├── com.absoloop.testCases      Test Scripts (TestNG Classes)
-│   ├── com.absoloop.testBase       Base Class (Driver Init, Common Methods)
-│   └── com.absolooplab.Utility     Utilities (Excel, ExtentReports, DataProviders)
-├── src/test/resources
-│   ├── config.properties           Global Configuration (Browser, URL)
-│   ├── log4j2.xml                  Logging Configuration
-│   ├── testng.xml                  Test Suites (Master, Grouping, CrossBrowser)
-│   └── testData                    Excel Data Sheets
-├── reports                         HTML Execution Reports
-├── logs                            Automation Execution Logs
-└── pom.xml                         Project Dependencies
-Key Features
-•	Hybrid Approach: Combines Modular and Data-Driven frameworks.
-•	Page Object Model: Keeps tests separate from object locators.
-•	Data-Driven Testing: Reads test data dynamically from Excel (using ExcelUtility).
-•	Detailed Reporting: Generates interactive HTML reports via ExtentReports, including screenshots for failed tests.
-•	Logging: Implements Log4j2 to capture step-by-step execution details in logs/automation.log.
-•	Cross-Browser Support: Run tests on Chrome, Edge, or Firefox by changing config.properties or using crossbrowsertests.xml.
-•	Grouping: Supports Sanity, Regression, and Master suites via XML configuration.
-How to Run Tests
-1. Prerequisites
-•	Java JDK 8 or higher
-•	Maven installed and configured
-•	Browser drivers (managed automatically via Selenium Manager)
-2. Run via Command Line (Maven)
-To execute the master suite (all tests): mvn clean test
-To execute a specific suite (e.g., Grouping or CrossBrowser):
-•	mvn test -DsuiteXmlFile=grouping.xml
-•	mvn test -DsuiteXmlFile=crossbrowsertests.xml
-3. Run via Jenkins (CI/CD)
-This project is CI/CD ready.
-1.	Create a Maven Project in Jenkins.
-2.	Link this GitHub repository.
-3.	Set the build goal to clean test.
-4.	(Optional) Configure the HTML Publisher Plugin to archive reports from the reports/ folder.
-Sample Report
-The framework auto-generates a report at reports/Test-Report-YYYY.MM.DD.HH.mm.ss.html.
-•	Pass/Fail Charts
-•	Execution Time & Environment Details
-•	Screenshots for Failures
-Author
-Tejas Zombade
+3. Via Batch File:Execute run.bat for quick local execution without an IDE.
+   Jenkins Integration
+   The project includes a Jenkinsfile for seamless integration into DevOps pipelines. It handles:
+   • Automatic build triggers.
+   • Parallel test execution on distributed nodes.
+   • Automatic archival of Extent Reports and failure screenshots.
+   Project Structure
+   • src/test/java: Test cases and testBase logic (ThreadLocal management).
+   • src/main/java: Page Objects (POM) and Utility managers.
+   • screenshots/: Automated capture on test failure.
+   • config.properties: Externalized environment and credential management.
