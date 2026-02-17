@@ -9,8 +9,8 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.logging.log4j.LogManager; //for logger
-import org.apache.logging.log4j.Logger; //for logger
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,84 +25,91 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	// No more static WebDriver. Use ThreadLocal for parallel
-	// execution safety.
-	private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
+    // ThreadLocal ensures each thread (browser) has its own isolated WebDriver instance
+    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
-	public ResourceBundle rb; // to read config.properties
-	public Logger logger; // for Logging
+    public ResourceBundle rb;
+    public Logger logger;
 
-	@BeforeClass(groups = { "Master", "Sanity", "Regression" })
-	@Parameters("browser")
-	public void setup(String br) {
-		rb = ResourceBundle.getBundle("config"); // Load config.properties
-		logger = LogManager.getLogger(this.getClass()); // for Logger
+    @BeforeClass(groups = { "Master", "Sanity", "Regression" })
+    @Parameters({"os", "browser"}) // Catching both parameters from your XML
+    public void setup(String os, String br) {
+        
+        rb = ResourceBundle.getBundle("config"); // Loads config.properties
+        logger = LogManager.getLogger(this.getClass());
 
-		WebDriver driver = null; // Local variable first
+        WebDriver driver = null;
 
-		// Launch right browser based on parameter
-		if (br.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-		} else if (br.equalsIgnoreCase("edge")) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-		} else {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-		}
+        // EXPERT STRATEGY: Cross-Browser Setup
+        switch (br.toLowerCase()) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                logger.error("Invalid browser name provided in XML");
+                return;
+        }
 
-		// RUTHLESS FIX 2: Assign the driver to the ThreadLocal container
-		threadLocalDriver.set(driver);
+        threadLocalDriver.set(driver);
 
-		// From now on, use getDriver() instead of 'driver'
-		getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		getDriver().manage().window().maximize();
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
 
-		getDriver().get(rb.getString("appURL2")); // get url from config.properties file
-	}
+        // Use a generic key "appURL" for better maintainability
+        getDriver().get(rb.getString("appURL2")); 
+    }
 
-	@AfterClass(groups = { "Master", "Sanity", "Regression" })
-	public void tearDown() {
-		// RUTHLESS FIX 3: Quit the specific driver for this thread and clean up memory
-		if (getDriver() != null) {
-			getDriver().quit();
-			threadLocalDriver.remove(); // Essential for memory management
-		}
-	}
+    @AfterClass(groups = { "Master", "Sanity", "Regression" })
+    public void tearDown() {
+        if (getDriver() != null) {
+            getDriver().quit();
+            threadLocalDriver.remove(); // Prevents memory leaks in Jenkins/CI
+        }
+    }
 
-	// RUTHLESS FIX 4: The global access point for the driver.
-	// Call BaseClass.getDriver() anywhere in your framework.
-	public static WebDriver getDriver() {
-		return threadLocalDriver.get();
-	}
+    // Global access for Page Objects and Listeners
+    public static WebDriver getDriver() {
+        return threadLocalDriver.get();
+    }
 
-	public String randomeString() {
-		String generatedString = RandomStringUtils.randomAlphabetic(5);
-		return (generatedString);
-	}
+    // Helper Methods for Data Generation
+    public String randomString() {
+        return RandomStringUtils.randomAlphabetic(5);
+    }
 
-	public String randomeNumber() {
-		String generatedString2 = RandomStringUtils.randomNumeric(10);
-		return (generatedString2);
-	}
+    public String randomNumber() {
+        return RandomStringUtils.randomNumeric(10);
+    }
 
-	public String captureScreen(String tname) throws IOException {
+    public String randomAlphaNumeric() {
+        return RandomStringUtils.randomAlphanumeric(8);
+    }
 
-		String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+    public String captureScreen(String tname) throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 
-		// RUTHLESS FIX 5: Use getDriver() here so screenshots work in parallel
-		// execution
-		TakesScreenshot takesScreenshot = (TakesScreenshot) getDriver();
+        TakesScreenshot takesScreenshot = (TakesScreenshot) getDriver();
+        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        
+        // RUTHLESS FIX: Cross-platform file separator (works on Windows & Linux)
+        String destination = System.getProperty("user.dir") + File.separator + "screenshots" 
+                             + File.separator + tname + "_" + timeStamp + ".png";
 
-		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-		String destination = System.getProperty("user.dir") + "\\screenshots\\" + tname + "_" + timeStamp + ".png";
-
-		try {
-			FileUtils.copyFile(source, new File(destination));
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return destination;
-	}
+        try {
+            FileUtils.copyFile(source, new File(destination));
+        } catch (Exception e) {
+            logger.error("Screenshot failed: " + e.getMessage());
+        }
+        return destination;
+    }
 }
