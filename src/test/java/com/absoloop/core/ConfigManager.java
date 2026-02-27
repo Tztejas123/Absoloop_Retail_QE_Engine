@@ -6,7 +6,7 @@ public class ConfigManager {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("config");
 
-    private ConfigManager() {}
+    private ConfigManager() {}   // prevent object creation
 
     public static String get(String key) {
         return rb.getString(key);

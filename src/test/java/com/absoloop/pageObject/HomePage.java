@@ -3,7 +3,6 @@ package com.absoloop.pageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.absolooplab.Utility.ScreenshotUtil;
 import com.absolooplab.Utility.WaitUtil;
 
 public class HomePage extends BasePage {
