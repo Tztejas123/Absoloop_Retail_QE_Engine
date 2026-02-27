@@ -7,7 +7,7 @@ import com.absoloop.pageObject.HomePage;
 import com.absoloop.pageObject.LoginPage;
 import com.absoloop.pageObject.MyAccountPage;
 import com.absoloop.testBase.BaseClass;
-import com.absolooplab.Utility.ConfigManager;
+import com.absoloop.core.ConfigManager;
 
 public class TC_002_LoginTest extends BaseClass {
 
