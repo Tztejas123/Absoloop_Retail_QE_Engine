@@ -11,6 +11,8 @@ reports/
 screenshots/
 ExtentReports/
 surefire-reports/
+allure-results/
+allure-report/
 *.log
 
 # --- IDE Configurations (Eclipse/IntelliJ/VS Code) ---
