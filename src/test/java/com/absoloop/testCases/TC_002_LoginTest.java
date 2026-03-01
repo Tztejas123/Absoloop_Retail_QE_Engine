@@ -7,46 +7,31 @@ import com.absoloop.pageObject.HomePage;
 import com.absoloop.pageObject.LoginPage;
 import com.absoloop.pageObject.MyAccountPage;
 import com.absoloop.testBase.BaseClass;
+import com.absoloop.core.ConfigManager;
 
-public class TC_002_LoginTest extends BaseClass
-{
-	@Test(groups= {"Sanity","Master"}) //Step8 groups added
-	public void test_Login()
-	{
-		logger.info("Starting TC_002_LoginTest");
-		
-		try
-		{				
-			HomePage hp=new HomePage(getDriver());
-			
-			hp.clickMyAccount();
-						
-			hp.clickLogin();
-			
-			LoginPage lp=new LoginPage(getDriver());
-			
-			lp.setEmail(rb.getString("email")); // valid email, get it from properties file
-			
-			lp.setPassword(rb.getString("password")); // valid password, get it from properties file
-			
-			lp.clickLogin();
-			
-			MyAccountPage macc=new MyAccountPage(getDriver());
-			
-			boolean targetpage=macc.isMyAccountPageExists();
-						
-			Assert.assertEquals(targetpage, true);
-			
-		}	
-		catch(Exception e){
-			logger.error("Test Failed: ", e); 
-			Assert.fail("Test failed: " + e.getMessage());
-		}
-		logger.info(" Finished TC_002_LoginTest");
-		
-	}
-	
-	
+public class TC_002_LoginTest extends BaseClass {
+
+    @Test(groups = { "Sanity", "Master" })
+    public void test_Login() {
+
+        // Step 1: Navigate to Login
+        HomePage hp = new HomePage();
+        hp.clickMyAccount();
+        hp.clickLogin();
+
+        // Step 2: Perform Login
+        LoginPage lp = new LoginPage();
+        lp.setEmail(ConfigManager.get("email"));
+        lp.setPassword(ConfigManager.get("password"));
+        lp.clickLogin();
+
+        // Step 3: Validation
+        MyAccountPage macc = new MyAccountPage();
+        boolean targetpage = macc.isMyAccountPageExists();
+
+        Assert.assertTrue(
+                targetpage,
+                "Login failed: My Account page not displayed."
+        );
+    }
 }
-
-

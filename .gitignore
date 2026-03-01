@@ -1,36 +1,46 @@
-# --- Maven & Build Artifacts ---
+# ==============================
+# Maven / Build Artifacts
+# ==============================
 target/
 test-output/
-bin/
+surefire-reports/
+
+# Compiled files
 *.class
 *.jar
-*.war
 
-# --- Logs & Auto-Generated Reports ---
+# ==============================
+# Logs & Reports
+# ==============================
 logs/
 reports/
 screenshots/
 ExtentReports/
-surefire-reports/
 allure-results/
 allure-report/
 *.log
 
-# --- IDE Configurations (Eclipse/IntelliJ/VS Code) ---
+# ==============================
+# IDE Files
+# ==============================
 .idea/
 .vscode/
 .settings/
+*.iml
 .classpath
 .project
-*.iml
 *.launch
 
-# --- OS & Misc Junk ---
+# ==============================
+# OS Files
+# ==============================
 .DS_Store
 Thumbs.db
-testing.txt
 
-# --- Security & Secrets (Crucial for Industry) ---
+# ==============================
+# Security / Secrets
+# ==============================
 .env
+.env.*
 *secret*
 *credentials*.properties
