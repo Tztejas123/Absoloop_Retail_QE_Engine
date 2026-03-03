@@ -21,36 +21,27 @@ public class DriverFactory {
         if (execution.equalsIgnoreCase("remote")) {
             try {
                 URL gridUrl = new URL(ConfigManager.get("gridURL"));
-
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--start-maximized");
-
-                driver = new RemoteWebDriver(gridUrl, options);
-
+                driver = new RemoteWebDriver(gridUrl, new ChromeOptions());
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Grid URL", e);
             }
         } else {
-
             switch (browser.toLowerCase()) {
-
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--start-maximized");
-                    driver = new ChromeDriver(chromeOptions);
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--start-maximized");
+                    driver = new ChromeDriver(options);
                     break;
 
                 case "edge":
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                    driver.manage().window().maximize();
                     break;
 
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                    driver.manage().window().maximize();
                     break;
 
                 default:
@@ -58,11 +49,7 @@ public class DriverFactory {
             }
         }
 
-        // Global Timeouts
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
-
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().deleteAllCookies();
 
         return driver;

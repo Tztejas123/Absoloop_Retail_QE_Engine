@@ -13,12 +13,22 @@ public class WaitUtil {
     private static final Duration TIMEOUT = Duration.ofSeconds(10);
 
     public static void waitForVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(DriverManager.getDriver(), TIMEOUT)
+                .until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), TIMEOUT);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(DriverManager.getDriver(), TIMEOUT)
+                .until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static void waitForUrlContains(String partialUrl) {
+        new WebDriverWait(DriverManager.getDriver(), TIMEOUT)
+                .until(ExpectedConditions.urlContains(partialUrl));
+    }
+
+    public static void waitForTitleContains(String title) {
+        new WebDriverWait(DriverManager.getDriver(), TIMEOUT)
+                .until(ExpectedConditions.titleContains(title));
     }
 }
