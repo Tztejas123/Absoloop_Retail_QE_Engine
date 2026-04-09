@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="CrossBrowserSuite" thread-count="5" parallel="tests">
+<suite name="CrossBrowserSuite" thread-count="1" parallel="tests">
 	<listeners>
 		<listener class-name="com.absolooplab.Utility.ExtentReportManager" />
 	</listeners>
-	<test thread-count="5" name="chrometest">
+	<test thread-count="1" name="chrometest">
 		<parameter name="os" value="Windows" />
 		<parameter name="browser" value="chrome" />
+		 <parameter name="url" value="https://tutorialsninja.com/demo/" />
 		<classes>
-			<class name="com.absoloop.testCases.TC_001_AccountRegistrationtTest" />
+			<class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
+            <class name="com.absoloop.testCases.TC_002_LoginTest"/>
+            <class name="com.absoloop.testCases.TC_003_LoginDDT"/>
 		</classes>
 	</test> <!--
 	Test -->
-	<test thread-count="5" name="edgetest">
+	<test thread-count="1" name="firefoxtest">
 		<parameter name="os" value="Windows" />
-		<parameter name="browser" value="edge" />
+		<parameter name="browser" value="firefox" />
+		 <parameter name="url" value="https://tutorialsninja.com/demo/" />
 		<classes>
-			<class name="com.absoloop.testCases.TC_001_AccountRegistrationtTest" />
+			<class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
+            <class name="com.absoloop.testCases.TC_002_LoginTest"/>
+            <class name="com.absoloop.testCases.TC_003_LoginDDT"/>
 		</classes>
 	</test> 
 </suite> <!--
