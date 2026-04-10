@@ -22,7 +22,7 @@ public class DriverFactory {
 
         if (execution.equalsIgnoreCase("remote")) {
             try {
-                URL gridUrl = new URL(ConfigManager.get("http://localhost/opencart/upload/index.php"));
+                URL gridUrl = new URL(ConfigManager.get("gridUrl"));
                 driver = new RemoteWebDriver(gridUrl, new ChromeOptions());
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Grid URL", e);
@@ -54,7 +54,7 @@ public class DriverFactory {
                     throw new IllegalArgumentException("Invalid browser: " + browser);
             }
         }
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         driver.manage().deleteAllCookies();
         return driver;
     }
