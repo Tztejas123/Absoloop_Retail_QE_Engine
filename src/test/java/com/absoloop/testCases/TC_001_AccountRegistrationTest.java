@@ -14,8 +14,9 @@ public class TC_001_AccountRegistrationTest extends BaseClass {
 	public void test_account_Registration() {
 
 		HomePage hp = new HomePage();
-		hp.clickMyAccount();
-		hp.clickRegister();
+		hp.header.clickMyAccount();   // ← was hp.clickMyAccount()
+		hp.header.clickRegister();    // ← was hp.clickRegister()
+		hp.header.clickLogin();       // ← was hp.clickLogin()
 
 		AccountRegistrationPage regpage = new AccountRegistrationPage();
 
@@ -31,6 +32,10 @@ public class TC_001_AccountRegistrationTest extends BaseClass {
 
 		String confmsg = regpage.getConfirmationMsg();
 
-		Assert.assertEquals(confmsg, "Your Account Has Been Created!", "Registration message mismatch!");
+		Assert.assertEquals(
+		        regpage.getConfirmationMsg(),
+		        "Your Account Has Been Created!",
+		        "Registration failed!"
+		    );
 	}
 }

@@ -17,7 +17,6 @@
             <class name="com.absoloop.testCases.TC_003_LoginDDT"/>
         </classes>
     </test>
-
     <test name="FireFoxTest">
         <parameter name="os" value="Windows" />
         <parameter name="browser" value="firefox" />

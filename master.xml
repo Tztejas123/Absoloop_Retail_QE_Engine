@@ -8,9 +8,10 @@
     </listeners>
 
     <test name="Chrome_Local_Run">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="os"        value="Windows" />   <!-- ✅ ADD THIS -->
+        <parameter name="browser"   value="chrome"/>
+        <parameter name="url"       value="https://tutorialsninja.com/demo/" />  <!-- ✅ ADD THIS -->
         <parameter name="execution" value="local"/>
-        <parameter name="headless" value="false"/>
 
         <classes>
             <class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>

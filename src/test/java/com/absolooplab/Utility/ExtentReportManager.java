@@ -6,10 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -61,6 +64,10 @@ public class ExtentReportManager implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+    	 Logger log = LogManager.getLogger(ExtentReportManager.class);
+    	    log.error("TEST FAILED: {} | Reason: {}",
+    	        result.getMethod().getMethodName(),
+    	        result.getThrowable().getMessage());
 
         test = extent.createTest(result.getMethod().getMethodName());
         test.assignCategory(result.getMethod().getGroups());

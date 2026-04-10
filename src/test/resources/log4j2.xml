@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration SYSTEM "log4j2.dtd">
 <Configuration status="WARN">
 
-	<Properties>
-		<Property name="basePath">./logs</Property>
-	</Properties>
+    <Properties>
+        <Property name="basePath">./logs</Property>
+        <!-- Color codes for console -->
+        <Property name="PASS_COLOR">%highlight</Property>
+    </Properties>
 
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-    </Console>
-    
-    <RollingFile name="File" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
-     <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n"/>
-      <SizeBasedTriggeringPolicy size="50000" />
-   </RollingFile>
-   
-    
-  </Appenders> 
-  <Loggers>
-    <Root level="Info">  	<!-- Here you can use multiple log levels   All < Trace < Debug < Info < Warn < Error < Fatal < Off -->
-      <AppenderRef ref="File"/>         <!--  <AppenderRef ref="Console"/>   -->
-    <AppenderRef ref="Console"/>
-    </Root>
-  </Loggers>
+    <Appenders>
+
+        <!-- Console with COLORS -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level}{FATAL=red blink, ERROR=red bold, WARN=yellow bold, INFO=green, DEBUG=cyan, TRACE=white} [%C{1}.%M():%L] - %msg%n"
+                disableAnsi="false"/>
+        </Console>
+
+        <!-- File log — full class + line number -->
+        <RollingFile name="File"
+                     fileName="${basePath}/automation.log"
+                     filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log">
+            <PatternLayout
+                pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%C{1}.%M():%L] - %msg%n"/>
+            <SizeBasedTriggeringPolicy size="5MB"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+
 </Configuration>
