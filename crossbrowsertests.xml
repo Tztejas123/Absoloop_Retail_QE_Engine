@@ -5,9 +5,10 @@
 		<listener class-name="com.absolooplab.Utility.ExtentReportManager" />
 	</listeners>
 	<test thread-count="1" name="chrometest">
-		<parameter name="os" value="Windows" />
-		<parameter name="browser" value="chrome" />
-		 <parameter name="url" value="https://tutorialsninja.com/demo/" />
+		 <parameter name="os"        value="Windows" />   <!-- ✅ ADD THIS -->
+        <parameter name="browser"   value="chrome"/>
+        <parameter name="url"       value="https://tutorialsninja.com/demo/" />  <!-- ✅ ADD THIS -->
+        <parameter name="execution" value="local"/>
 		<classes>
 			<class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
             <class name="com.absoloop.testCases.TC_002_LoginTest"/>
@@ -16,9 +17,10 @@
 	</test> <!--
 	Test -->
 	<test thread-count="1" name="firefoxtest">
-		<parameter name="os" value="Windows" />
-		<parameter name="browser" value="firefox" />
-		 <parameter name="url" value="https://tutorialsninja.com/demo/" />
+		 <parameter name="os"        value="Windows" />   <!-- ✅ ADD THIS -->
+        <parameter name="browser"   value="chrome"/>
+        <parameter name="url"       value="https://tutorialsninja.com/demo/" />  <!-- ✅ ADD THIS -->
+        <parameter name="execution" value="local"/>
 		<classes>
 			<class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
             <class name="com.absoloop.testCases.TC_002_LoginTest"/>
