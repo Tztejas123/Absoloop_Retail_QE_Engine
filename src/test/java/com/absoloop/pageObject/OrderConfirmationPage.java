@@ -6,21 +6,23 @@ import com.absolooplab.Utility.WaitUtil;
 
 public class OrderConfirmationPage extends BasePage {
 
-    @FindBy(xpath = "//h1[contains(.,'Your order has been placed')]")
-    private WebElement msgConfirmation;
+	@FindBy(xpath = "//h1[contains(.,'Your order has been placed')]")
+	private WebElement msgConfirmation;
 
-    @FindBy(xpath = "//a[contains(.,'Continue')]")
-    private WebElement btnContinue;
+	@FindBy(xpath = "//a[contains(.,'Continue')]")
+	private WebElement btnContinue;
 
-    public OrderConfirmationPage() { super(); }
+	public OrderConfirmationPage() {
+		super();
+	}
 
-    public boolean isOrderConfirmed() {
-        return isDisplayed(msgConfirmation, "Order Confirmation Message");
-    }
+	public boolean isOrderConfirmed() {
+		return isDisplayed(msgConfirmation, "Order Confirmation Message");
+	}
 
-    public HomePage clickContinue() {
-        click(btnContinue, "Continue After Order");
-        WaitUtil.waitForPageLoad();
-        return new HomePage();
-    }
+	public HomePage clickContinue() {
+		click(btnContinue, "Continue After Order");
+		WaitUtil.waitForPageLoad();
+		return new HomePage();
+	}
 }

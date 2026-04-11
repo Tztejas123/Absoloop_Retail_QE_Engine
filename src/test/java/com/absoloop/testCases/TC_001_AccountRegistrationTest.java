@@ -2,7 +2,8 @@ package com.absoloop.testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.absoloop.flows.RegistrationFlows;
+
+import com.absoloop.flowsBusines.RegistrationFlows;
 import com.absoloop.pageObject.AccountRegistrationPage;
 import com.absoloop.testBase.BaseClass;
 

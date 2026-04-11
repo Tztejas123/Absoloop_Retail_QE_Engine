@@ -44,9 +44,9 @@ public class CartPage extends BasePage {
 	 * method chaining.
 	 */
 	public CheckoutPage proceedToCheckout() {
-	    click(btnCheckout, "Proceed to Checkout");
-	    WaitUtil.waitForPageLoad();
-	    return new CheckoutPage();   // 🔥 MUST RETURN THIS
+		click(btnCheckout, "Proceed to Checkout");
+		WaitUtil.waitForPageLoad();
+		return new CheckoutPage(); // 🔥 MUST RETURN THIS
 	}
 
 	public HomePage continueShopping() {

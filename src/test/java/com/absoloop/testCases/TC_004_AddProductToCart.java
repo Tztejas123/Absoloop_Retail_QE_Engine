@@ -3,7 +3,7 @@ package com.absoloop.testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.absoloop.core.ConfigManager;
-import com.absoloop.flows.CartFlows;
+import com.absoloop.flowsBusines.CartFlows;
 import com.absoloop.pageObject.CartPage;
 import com.absoloop.testBase.BaseClass;
 

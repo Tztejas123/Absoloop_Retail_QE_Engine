@@ -31,33 +31,33 @@ public class CheckoutPage extends BasePage {
 	}
 
 	public CheckoutPage enterBillingFirstname(String v) {
-	    type(txtFirstname, v, "Billing Firstname");
-	    return this;
+		type(txtFirstname, v, "Billing Firstname");
+		return this;
 	}
 
 	public CheckoutPage enterBillingLastname(String v) {
-	    type(txtLastname, v, "Billing Lastname");
-	    return this;
+		type(txtLastname, v, "Billing Lastname");
+		return this;
 	}
 
 	public CheckoutPage enterAddress(String v) {
-	    type(txtAddress, v, "Address");
-	    return this;
+		type(txtAddress, v, "Address");
+		return this;
 	}
 
 	public CheckoutPage enterCity(String v) {
-	    type(txtCity, v, "City");
-	    return this;
+		type(txtCity, v, "City");
+		return this;
 	}
 
 	public CheckoutPage enterPostcode(String v) {
-	    type(txtPostcode, v, "Postcode");
-	    return this;
+		type(txtPostcode, v, "Postcode");
+		return this;
 	}
 
 	public OrderConfirmationPage confirmOrder() {
-	    click(btnConfirmOrder, "Confirm Order");
-	    WaitUtil.waitForPageLoad();
-	    return new OrderConfirmationPage();  // 🔥 MUST RETURN
+		click(btnConfirmOrder, "Confirm Order");
+		WaitUtil.waitForPageLoad();
+		return new OrderConfirmationPage(); // 🔥 MUST RETURN
 	}
 }

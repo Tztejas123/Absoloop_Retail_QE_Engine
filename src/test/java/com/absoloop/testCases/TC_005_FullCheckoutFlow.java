@@ -2,10 +2,11 @@ package com.absoloop.testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.absoloop.flows.AuthFlows;
-import com.absoloop.flows.CartFlows;
-import com.absoloop.flows.CheckoutFlows;
+
 import com.absoloop.core.ConfigManager;
+import com.absoloop.flowsBusines.AuthFlows;
+import com.absoloop.flowsBusines.CartFlows;
+import com.absoloop.flowsBusines.CheckoutFlows;
 import com.absoloop.pageObject.OrderConfirmationPage;
 import com.absoloop.testBase.BaseClass;
 

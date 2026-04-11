@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="MasterSuite" thread-count="2">
-
     <listeners>
         <listener class-name="com.absolooplab.Utility.ExtentReportManager"/>
     </listeners>

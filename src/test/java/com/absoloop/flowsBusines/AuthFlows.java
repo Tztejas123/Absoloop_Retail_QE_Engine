@@ -1,4 +1,4 @@
-package com.absoloop.flows;
+package com.absoloop.flowsBusines;
 
 import com.absoloop.core.ConfigManager;
 import com.absoloop.pageObject.HomePage;

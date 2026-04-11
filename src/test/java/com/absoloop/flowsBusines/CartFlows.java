@@ -1,4 +1,4 @@
-package com.absoloop.flows;
+package com.absoloop.flowsBusines;
 
 import com.absoloop.pageObject.CartPage;
 import com.absoloop.pageObject.HomePage;

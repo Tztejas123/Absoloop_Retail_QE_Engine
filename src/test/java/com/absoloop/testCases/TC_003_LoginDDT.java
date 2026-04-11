@@ -2,7 +2,8 @@ package com.absoloop.testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.absoloop.flows.AuthFlows;
+
+import com.absoloop.flowsBusines.AuthFlows;
 import com.absoloop.pageObject.MyAccountPage;
 import com.absoloop.testBase.BaseClass;
 import com.absolooplab.Utility.DataProviders;

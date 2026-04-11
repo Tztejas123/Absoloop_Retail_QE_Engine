@@ -8,48 +8,63 @@ import com.absolooplab.Utility.WaitUtil;
 
 public class ProductDetailPage extends BasePage {
 
-    public final AlertComponent alert;
-    public final BreadcrumbComponent breadcrumb;
+	public final AlertComponent alert;
+	public final BreadcrumbComponent breadcrumb;
 
-    @FindBy(xpath = "//h1")                      private WebElement txtProductName;
-    @FindBy(xpath = "//li[@class='price-new']")  private WebElement txtPrice;
-    @FindBy(id = "input-quantity")               private WebElement txtQuantity;
-    @FindBy(id = "button-cart")                  private WebElement btnAddToCart;
-    @FindBy(xpath = "//button[@title='Add to Wish List']")       private WebElement btnWishList;
-    @FindBy(xpath = "//button[@title='Compare this Product']")   private WebElement btnCompare;
+	@FindBy(xpath = "//h1")
+	private WebElement txtProductName;
+	@FindBy(xpath = "//li[@class='price-new']")
+	private WebElement txtPrice;
+	@FindBy(id = "input-quantity")
+	private WebElement txtQuantity;
+	@FindBy(id = "button-cart")
+	private WebElement btnAddToCart;
+	@FindBy(xpath = "//button[@title='Add to Wish List']")
+	private WebElement btnWishList;
+	@FindBy(xpath = "//button[@title='Compare this Product']")
+	private WebElement btnCompare;
 
-    public ProductDetailPage() {
-        super();
-        this.alert     = new AlertComponent();
-        this.breadcrumb = new BreadcrumbComponent();
-    }
+	public ProductDetailPage() {
+		super();
+		this.alert = new AlertComponent();
+		this.breadcrumb = new BreadcrumbComponent();
+	}
 
-    public String getProductName() { return getText(txtProductName, "Product Name"); }
-    public String getPrice()       { return getText(txtPrice,        "Product Price"); }
+	public String getProductName() {
+		return getText(txtProductName, "Product Name");
+	}
 
-    public ProductDetailPage setQuantity(String qty) {
-        clearAndType(txtQuantity, qty, "Quantity");
-        return this; // fluent
-    }
+	public String getPrice() {
+		return getText(txtPrice, "Product Price");
+	}
 
-    /**
-     * Add to cart and return CartPage.
-     * Changed from void — enables method chaining.
-     */
-    public CartPage addToCart() {
-        click(btnAddToCart, "Add to Cart");
-        WaitUtil.waitForPageLoad();
-        return new CartPage();
-    }
+	public ProductDetailPage setQuantity(String qty) {
+		clearAndType(txtQuantity, qty, "Quantity");
+		return this; // fluent
+	}
 
-    public void addToWishList()  { click(btnWishList, "Add to Wishlist"); }
-    public void compareProduct() { click(btnCompare,  "Compare Product"); }
+	/**
+	 * Add to cart and return CartPage. Changed from void — enables method chaining.
+	 */
+	public CartPage addToCart() {
+		click(btnAddToCart, "Add to Cart");
+		WaitUtil.waitForPageLoad();
+		return new CartPage();
+	}
 
-    // clearAndType exposed via BasePage for fluent chaining above
-    protected void clearAndType(WebElement element, String value, String name) {
-        WaitUtil.waitForVisibility(element);
-        element.clear();
-        WaitUtil.waitForVisibility(element);
-        element.sendKeys(value);
-    }
+	public void addToWishList() {
+		click(btnWishList, "Add to Wishlist");
+	}
+
+	public void compareProduct() {
+		click(btnCompare, "Compare Product");
+	}
+
+	// clearAndType exposed via BasePage for fluent chaining above
+	protected void clearAndType(WebElement element, String value, String name) {
+		WaitUtil.waitForVisibility(element);
+		element.clear();
+		WaitUtil.waitForVisibility(element);
+		element.sendKeys(value);
+	}
 }
