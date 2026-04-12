@@ -16,6 +16,10 @@
             <class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
             <class name="com.absoloop.testCases.TC_002_LoginTest"/>
             <class name="com.absoloop.testCases.TC_003_LoginDDT"/>
+            <class name="com.absoloop.testCases.TC_004_AddProductToCart"/>
+             <class name="com.absoloop.testCases.TC_004_AddProductToCart"/>
+             <class name="com.absoloop.testCases.TC_005_FullCheckoutFlow"/>
+             
         </classes>
     </test>
 

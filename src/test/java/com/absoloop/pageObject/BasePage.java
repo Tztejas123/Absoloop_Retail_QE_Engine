@@ -16,7 +16,7 @@ public abstract class BasePage {
 
 	public BasePage() {
 		this.driver = DriverManager.getDriver();
-		// ✅ Wait for page to load BEFORE initializing elements
+		// Wait for page to load BEFORE initializing elements
 		WaitUtil.waitForPageLoad();
 		PageFactory.initElements(driver, this);
 		log.info("Initialized Page: {}", this.getClass().getSimpleName());
