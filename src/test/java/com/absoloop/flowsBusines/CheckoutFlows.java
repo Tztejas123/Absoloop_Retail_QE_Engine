@@ -1,7 +1,6 @@
 package com.absoloop.flowsBusines;
 
 import com.absoloop.pageObject.CartPage;
-import com.absoloop.pageObject.CheckoutPage;
 import com.absoloop.pageObject.OrderConfirmationPage;
 
 /**

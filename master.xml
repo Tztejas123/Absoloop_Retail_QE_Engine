@@ -2,25 +2,26 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="MasterSuite" thread-count="2">
-    <listeners>
-        <listener class-name="com.absolooplab.Utility.ExtentReportManager"/>
-    </listeners>
+	<listeners>
+		<listener class-name="com.absolooplab.Utility.ExtentReportManager" />
+		 <listener class-name="com.absolooplab.Utility.RetryAnnotationTransformer"/>
+	</listeners>
 
-    <test name="Chrome_Local_Run">
-        <parameter name="os"        value="Windows" />   <!-- ✅ ADD THIS -->
-        <parameter name="browser"   value="chrome"/>
-        <parameter name="url"       value="https://tutorialsninja.com/demo/" />  <!-- ✅ ADD THIS -->
-        <parameter name="execution" value="local"/>
+	<test name="Chrome_Local_Run">
+		<parameter name="os" value="Windows" />  
+		<parameter name="browser" value="chrome" />
+		<parameter name="url" value="https://tutorialsninja.com/demo/" />  
+		<parameter name="execution" value="local" />
 
-        <classes>
-            <class name="com.absoloop.testCases.TC_001_AccountRegistrationTest"/>
-            <class name="com.absoloop.testCases.TC_002_LoginTest"/>
-            <class name="com.absoloop.testCases.TC_003_LoginDDT"/>
-            <class name="com.absoloop.testCases.TC_004_AddProductToCart"/>
-             <class name="com.absoloop.testCases.TC_004_AddProductToCart"/>
-             <class name="com.absoloop.testCases.TC_005_FullCheckoutFlow"/>
-             
-        </classes>
-    </test>
+		<classes>
+			<class name="com.absoloop.testCases.TC_001_AccountRegistrationTest" />
+			<class name="com.absoloop.testCases.TC_002_LoginTest" />
+			<class name="com.absoloop.testCases.TC_003_LoginDDT" />
+			<class name="com.absoloop.testCases.TC_004_AddProductToCart" />
+			<class name="com.absoloop.testCases.TC_004_AddProductToCart" />
+			<class name="com.absoloop.testCases.TC_005_FullCheckoutFlow" />
+
+		</classes>
+	</test>
 
 </suite>
