@@ -1,7 +1,6 @@
 package com.absolooplab.Utility;
 
 import java.time.Duration;
-import java.util.function.Function;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

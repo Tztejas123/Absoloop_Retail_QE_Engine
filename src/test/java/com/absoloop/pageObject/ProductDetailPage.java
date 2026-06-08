@@ -2,9 +2,9 @@ package com.absoloop.pageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import com.absoloop.pageObject.components.AlertComponent;
 import com.absoloop.pageObject.components.BreadcrumbComponent;
-import com.absoloop.pageObject.components.HeaderComponent;
 import com.absolooplab.Utility.WaitUtil;
 
 public class ProductDetailPage extends BasePage {
